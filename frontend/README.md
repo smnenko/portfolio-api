@@ -1,5 +1,5 @@
-# Portfolio-API BACKEND
-Project uses Quasar and some framework like axios to interact with backend in GraphQL mode.
+# Portfolio-API FRONTEND
+Project uses Quasar, and some frameworks like axios to interact with a backend in GraphQL mode.
 
 ## Project stack:
 1. Quasar \>= 2.0.0
