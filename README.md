@@ -7,7 +7,7 @@ The aim of project is allow to users see my portflio and projects I've created. 
 2. Django \>= 4.0.2
 3. psycopg2 \>= 2.9.3
 
-## Frontend stack
+## Frontend stack:
 1. Quasar \>= 2.0.0
 
 ## Installation
