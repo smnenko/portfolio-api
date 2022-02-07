@@ -1,0 +1,1 @@
+./manage.py runserver --settings=apps.settings-dev
