@@ -8,7 +8,7 @@
                                 leave-active-class="animated fadeOut">
                         <div
                             class="text-h5 text-white text-no-wrap text-uppercase text-weight-bold"
-                            style="transform: rotate(-90deg); letter-spacing: 20px"
+                            style="transform: rotate(-90deg); letter-spacing: 1rem"
                         >
                             My <span class="text-warning">personal page</span>
                         </div>

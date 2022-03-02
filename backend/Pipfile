@@ -6,6 +6,13 @@ name = "pypi"
 [packages]
 django = "*"
 psycopg2 = "*"
+graphene-django = "*"
+fake-useragent = "*"
+requests = "*"
+selenium = "*"
+webdriver-manager = "*"
+factory-boy = "*"
+django-redis = "*"
 
 [dev-packages]
 django-environ = "*"

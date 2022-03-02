@@ -1,14 +1,26 @@
 import os
+import sys
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default='').split(' ')
+
+PROJECT_APPS = [
+    'core',
+    'mail_account',
+    'discord_account'
+]
+
+THIRD_PARTY_APPS = [
+    'graphene_django'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,6 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    *THIRD_PARTY_APPS,
+    *PROJECT_APPS
 ]
 
 MIDDLEWARE = [
@@ -60,6 +75,21 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': (
+            f'redis://'
+            f'{os.getenv("REDIS_USER", default="")}:{os.getenv("REDIS_PASS", default="")}@'
+            f'{os.getenv("REDIS_HOST")}:{os.getenv("REDIS_PORT")}/'
+            f'{os.getenv("REDIS_TABLE")}'
+        ),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -75,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# GraphQL Query configuration
+
+GRAPHENE = {
+    'SCHEMA': 'core.schema.schema'
+}
 
 # Internationalization
 
