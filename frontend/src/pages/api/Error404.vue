@@ -1,7 +1,7 @@
 <template>
-  <div class="fullscreen bg-dark text-white text-center q-pa-md flex flex-center">
+  <div class="fullscreen text-center q-pa-md flex flex-center">
     <div>
-      <div style="font-size: 30vh">
+      <div style="font-size: 30vh" class="text-secondary">
         404
       </div>
 
@@ -10,13 +10,10 @@
       </div>
 
       <q-btn
-        class="q-mt-xl"
-        color="dark"
-        text-color="warning"
-        unelevated
+        class="q-mt-xl q-py-sm q-px-xl"
         to="/api"
         label="Go Home"
-        no-caps
+        rounded
       />
     </div>
   </div>

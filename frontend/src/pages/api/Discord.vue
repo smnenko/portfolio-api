@@ -1,12 +1,12 @@
 <template>
-  <q-page class="justify-start bg-dark shadow-2">
-    <q-tabs inline-label v-model="tab" class="text-white" align="justify">
+  <q-page class="justify-start shadow-2">
+    <q-tabs inline-label v-model="tab" align="justify">
       <q-tab label="Dashboard" name="dashboard" icon="dashboard" />
       <q-tab label="Add account" name="add_account" icon="create" />
       <q-tab label="Detailed view" name="detailed_view" icon="visibility" />
     </q-tabs>
 
-    <q-tab-panels v-model="tab" animated class="bg-dark text-white">
+    <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="dashboard">
         <q-table
           title="Discord accounts"
@@ -16,19 +16,18 @@
           v-model:selected="selected"
           :ref="tableRef"
           row-key="id"
-          dark
         />
 
-        <q-separator style="margin-top: 1rem"/>
+        <q-separator class="q-my-lg" />
 
-        <div class="full-width row justify-start">
-          <q-card class="bg-dark col-lg-4 col-xs-12">
+        <div class="full-width row justify-between">
+          <q-card class="col-lg-4 col-xs-12">
             <q-card-section>
               <div class="text-overline">Follow channel</div>
               <div class="text-caption">Follow to the selected channel by the link</div>
               <q-card-section>
                 <q-form class="column justify-center">
-                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." dark model-value="" class="col col-12 q-mb-sm">
+                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." model-value="" class="col col-12 q-mb-sm">
                     <template v-slot:prepend>
                       <q-icon name="link" />
                     </template>
@@ -40,13 +39,13 @@
             </q-card-section>
           </q-card>
 
-          <q-card class="bg-dark col-lg-4 col-xs-12">
+          <q-card class="col-lg-4 col-xs-12">
             <q-card-section>
               <div class="text-overline">Unfollow channel</div>
               <div class="text-caption">Unfollow from selected channel by the link</div>
               <q-card-section>
                 <q-form class="column justify-center">
-                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." dark model-value="" class="col col-12 q-mb-sm">
+                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." model-value="" class="col col-12 q-mb-sm">
                     <template v-slot:prepend>
                       <q-icon name="link" />
                     </template>
@@ -58,19 +57,19 @@
             </q-card-section>
           </q-card>
 
-          <q-card class="bg-dark col-lg-4 col-xs-12">
+          <q-card class="col-lg-4 col-xs-12">
             <q-card-section>
               <div class="text-overline">Write a message to the channel</div>
               <div class="text-caption">Write a custom message to the channel by he link</div>
               <q-card-section>
                 <q-form class="column justify-center">
-                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." dark model-value="" class="col col-12 q-mb-sm">
+                  <q-input v-model="followLink" label="Enter the channel url" hint="https://discord.com/..." model-value="" class="col col-12 q-mb-sm">
                     <template v-slot:prepend>
                       <q-icon name="link" />
                     </template>
                   </q-input>
 
-                  <q-input v-model="followLink" label="Enter the message" hint="Some words..." dark model-value="" class="col col-12 q-mb-sm">
+                  <q-input v-model="followLink" label="Enter the message" hint="Some words..." model-value="" class="col col-12 q-mb-sm">
                     <template v-slot:prepend>
                       <q-icon name="link" />
                     </template>
