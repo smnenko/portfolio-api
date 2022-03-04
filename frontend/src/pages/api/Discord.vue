@@ -50,7 +50,7 @@
                                 </template>
                             </q-input>
 
-                            <q-btn outline label="Follow" color="secondary" class="col col-12"/>
+                            <q-btn outline rounded label="Follow" color="secondary" />
                         </q-form>
                     </q-card-section>
                 </q-card-section>
@@ -69,7 +69,7 @@
                                 </template>
                             </q-input>
 
-                            <q-btn outline rounded label="Unfollow" color="secondary" class="col col-12"/>
+                            <q-btn outline rounded label="Unfollow" color="secondary" />
                         </q-form>
                     </q-card-section>
                 </q-card-section>
@@ -95,7 +95,7 @@
                                 </template>
                             </q-input>
 
-                            <q-btn outline rounded label="Send the message" color="secondary" class="col col-12"/>
+                            <q-btn outline rounded label="Send the message" color="secondary" />
                         </q-form>
                     </q-card-section>
                 </q-card-section>
