@@ -46,7 +46,7 @@ const accountsLinks = [
         title: 'Mail',
         caption: 'Tools to deal with Email',
         icon: 'fas fa-envelope',
-        link: '/email'
+        link: '/mail'
     },
     {
         title: 'Telegram',
