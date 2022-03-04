@@ -1,7 +1,7 @@
 <template>
-    <q-page class="column">
-        <div class="row full-width q-mt-md">
-            <q-card bordered class="col-lg col-xs-12 text-center q-ml-md q-mr-sm">
+    <q-page class="column q-mx-md">
+        <div class="row full-width q-mt-md q-mb-md">
+            <q-card bordered class="col-lg col-xs-12 text-center q-mr-sm">
                 <q-card-section>
                     <div class="text-overline">Accounts created today:</div>
                     <div class="text-h2">505</div>
@@ -13,7 +13,7 @@
                     <div class="text-h2">1031</div>
                 </q-card-section>
             </q-card>
-            <q-card bordered class="col-lg col-xs-12 text-center q-ml-md q-mr-sm">
+            <q-card bordered class="col-lg col-xs-12 text-center q-ml-md">
                 <q-card-section>
                     <div class="text-overline">Accounts created at all:</div>
                     <div class="text-h2">31223</div>
@@ -21,22 +21,18 @@
             </q-card>
         </div>
 
-        <div class="full-width">
-            <q-table
-                :columns="columns"
-                :rows="rows"
-                selection="multiple"
-                v-model:selected="selected"
-                :ref="tableRef"
-                row-key="id"
-                class="q-mx-md q-mt-md"
-                :rows-per-page-options="[5, 10, 15, 20, 0]"
-                bordered
-            />
-        </div>
+        <q-table
+            :columns="columns"
+            :rows="rows"
+            selection="multiple"
+            v-model:selected="selected"
+            :ref="tableRef"
+            row-key="id"
+            :rows-per-page-options="[5, 10, 15, 20, 0]"
+            bordered
+        />
 
-
-        <div class="row q-pa-md">
+        <div class="row q-mt-md">
             <q-card class="col-lg col-xs-12 q-my-xs q-mr-sm" bordered>
                 <q-card-section>
                     <div class="text-overline">Follow channel</div>
