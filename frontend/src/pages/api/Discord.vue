@@ -4,19 +4,19 @@
             <q-card bordered class="col-lg col-xs-12 text-center q-mr-sm">
                 <q-card-section>
                     <div class="text-overline">Accounts created today:</div>
-                    <div class="text-h2">505</div>
+                    <div class="text-h2">0</div>
                 </q-card-section>
             </q-card>
             <q-card bordered class="col-lg col-xs-12 text-center q-ml-md q-mr-sm">
                 <q-card-section>
                     <div class="text-overline">Accounts created last week:</div>
-                    <div class="text-h2">1031</div>
+                    <div class="text-h2">0</div>
                 </q-card-section>
             </q-card>
             <q-card bordered class="col-lg col-xs-12 text-center q-ml-md">
                 <q-card-section>
                     <div class="text-overline">Accounts created at all:</div>
-                    <div class="text-h2">31223</div>
+                    <div class="text-h2">0</div>
                 </q-card-section>
             </q-card>
         </div>
@@ -26,11 +26,44 @@
             :rows="rows"
             selection="multiple"
             v-model:selected="selected"
-            :ref="tableRef"
             row-key="id"
             :rows-per-page-options="[5, 10, 15, 20, 0]"
             bordered
         />
+
+        <div class="flex q-mt-md justify-end">
+            <q-btn flat rounded color="secondary" label="Create" class="q-mx-sm" />
+            <q-btn flat rounded color="negative" label="Delete" class="q-mx-sm" @click="confirmDelete = true" />
+            <q-btn flat rounded color="warning" label="Clear" class="q-mx-sm" @click="clearTableSelection" />
+            <q-btn-dropdown flat rounded color="accent" label="Export" class="q-mx-sm">
+                <q-list>
+                    <q-item clickable v-close-popup>
+                        <q-item-section>
+                            <q-avatar icon="fas fa-file" />
+                        </q-item-section>
+                        <q-item-section>
+                            <q-item-label>TXT</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-close-popup>
+                        <q-item-section>
+                            <q-avatar icon="fas fa-file-pdf" />
+                        </q-item-section>
+                        <q-item-section>
+                            <q-item-label>PDF</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-close-popup>
+                        <q-item-section>
+                            <q-avatar icon="fas fa-file-csv" />
+                        </q-item-section>
+                        <q-item-section>
+                            <q-item-label>CSV</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </q-btn-dropdown>
+        </div>
 
         <div class="row q-mt-md">
             <q-card class="col-lg col-xs-12 q-my-xs q-mr-sm" bordered>
@@ -97,6 +130,19 @@
                 </q-card-section>
             </q-card>
         </div>
+
+        <q-dialog v-model="confirmDelete">
+            <q-card>
+                <q-card-section>
+                    <span>Do you really wants to delete selected accounts?</span>
+                </q-card-section>
+                <q-card-actions align="right">
+                    <q-btn flat color="negative" label="Yes, I'm sure!" @click="deleteRecords" />
+                    <q-btn flat color="secondary" label="Cancel" @click="confirmDelete = false" />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+
     </q-page>
 </template>
 
@@ -108,27 +154,33 @@ const columns = [
     {name: 'emails', required: true, label: 'Email', align: 'left', field: row => row.email, sortable: true},
     {name: 'passwords', required: true, label: 'Password', align: 'left', field: row => row.password},
     {name: 'tokens', required: true, label: 'Token', align: 'left', field: row => row.token},
-    {name: 'channels', required: true, label: 'Channels', align: 'left', field: row => row.channels, sortable: true},
-    {name: 'actions', required: true, label: 'Actions', align: 'left', field: row => null}
 ]
 
 const rows = [
-    {id: 1, username: 'Habney1', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 10},
-    {id: 2, username: 'Habney2', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 20},
-    {id: 3, username: 'Habney3', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 23},
-    {id: 4, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 11},
-    {id: 5, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 11},
-    {id: 6, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 11},
-    {id: 7, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', channels: 11},
+    {id: 1, username: 'Habney1', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: '11rv2ev2323423ew3f10rv2ev2323423ew3f'},
+    {id: 2, username: 'Habney2', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: '20rv2ev2323423ew3f11rv2ev2323423ew3f'},
+    {id: 3, username: 'Habney3', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: '23rv2ev2323423ew3f11rv2ev2323423ew3f'},
+    {id: 4, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: '11rv2ev2323423ew3f11rv2ev2323423ew3f'},
+    {id: 5, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: '11rv2ev2323423ew3f11rv2ev2323423ew3f'},
+    {id: 6, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: 'rv2ev2323423ew3f1111rv2ev2323423ew3f'},
+    {id: 7, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: 'rv2ev2323423ew3f1111rv2ev2323423ew3f'},
+    {id: 7, username: 'Habney4', email: 'stanichgame@gmail.com', password: 'qwerty12345', token: 'rv2ev2323423ew3f1111rv2ev2323423ew3f'},
 ]
 
 export default defineComponent({
     name: 'DiscordIndex',
-    data() {
-
+    methods: {
+        clearTableSelection: function (event) {
+            this.selected = []
+        },
+        deleteRecords: function (event) {
+            alert('Records has been deleted')
+            this.confirmDelete = false
+        }
+    },
+    setup() {
         const selected = ref([])
-        const lastIndex = ref(null)
-        const tableRef = ref(null)
+        const confirmDelete = ref(false)
         const followLink = null
 
         return {
@@ -136,8 +188,8 @@ export default defineComponent({
             rows: rows,
 
             selected: selected,
-            lastIndex: lastIndex,
-            tableRef: tableRef,
+
+            confirmDelete: confirmDelete,
 
             followLink
         }

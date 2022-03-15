@@ -10,8 +10,11 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@quasar/extras": "^1.0.0",
+    "@vue/apollo-composable": "^4.0.0-alpha.16",
     "core-js": "^3.6.5",
+    "graphql": "^16.3.0",
     "quasar": "^2.0.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
@@ -19,10 +22,12 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0",
+    "@quasar/quasar-app-extension-apollo": "^2.0.0-beta.3",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",
-    "eslint-webpack-plugin": "^2.4.0"
+    "eslint-webpack-plugin": "^2.4.0",
+    "graphql-tag": "^2.12.6"
   },
   "browserslist": [
     "last 10 Chrome versions",

@@ -13,9 +13,12 @@ selenium = "*"
 webdriver-manager = "*"
 factory-boy = "*"
 django-redis = "*"
+django-graphql-jwt = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 django-environ = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.9"

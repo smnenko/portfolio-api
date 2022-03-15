@@ -10,7 +10,11 @@
                     @click="toggleLeftDrawer"
                 />
                 <q-space />
+                <span class="text-overline">By the community, for the community</span>
+                <q-space />
                 <div>
+                    <q-btn v-if="isAuthenticated()" flat rounded :label="getUsername()" color="secondary" to="/auth/signout" icon-right="fas fa-times" />
+                    <q-btn v-else flat rounded label="Login" to="/auth/signin" icon-right="fas fa-angle-right" />
                     <q-btn flat round :icon="getDarkModeIcon()" @click="toggleDarkMode" />
                     <span class="q-ml-md text-overline">V0.0.1a</span>
                 </div>
@@ -22,6 +26,7 @@
             side="left"
         >
             <q-list>
+                <NavigationLink icon="fas fa-chart-pie" link="" title="Dashboard" caption="Return to the home page"/>
                 <q-item-label class="text-bold" header>Accounts</q-item-label>
 
                 <NavigationLink
@@ -90,6 +95,15 @@ export default defineComponent({
 
     components: {
         NavigationLink
+    },
+
+    methods: {
+        isAuthenticated: function () {
+            return this.$q.cookies.has('token')
+        },
+        getUsername: function () {
+            return this.$q.cookies.get('username')
+        }
     },
 
     setup() {
