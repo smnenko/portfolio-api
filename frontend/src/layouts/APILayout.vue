@@ -1,108 +1,140 @@
 <template>
-  <q-layout view="lHh lpR fFf">
-    <q-header>
-      <q-toolbar class="bg-dark">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <q-layout view="hHh lpR fFf">
+        <q-header class="bg-dark">
+            <q-toolbar>
+                <q-btn
+                    flat
+                    round
+                    icon="menu"
+                    aria-label="Menu"
+                    @click="toggleLeftDrawer"
+                />
+                <q-space />
+                <span class="text-overline">By the community, for the community</span>
+                <q-space />
+                <div>
+                    <q-btn v-if="isAuthenticated()" flat rounded :label="getUsername()" color="secondary" to="/auth/signout" icon-right="fas fa-times" />
+                    <q-btn v-else flat rounded label="Login" to="/auth/signin" icon-right="fas fa-angle-right" />
+                    <q-btn flat round :icon="getDarkModeIcon()" @click="toggleDarkMode" />
+                    <span class="q-ml-md text-overline">V0.0.1a</span>
+                </div>
+            </q-toolbar>
+        </q-header>
 
-        <q-toolbar-title class="animated">
-          smnenko
-        </q-toolbar-title>
+        <q-drawer
+            v-model="leftDrawerOpen"
+            side="left"
+        >
+            <q-list>
+                <NavigationLink icon="fas fa-chart-pie" link="" title="Dashboard" caption="Return to the home page"/>
+                <q-item-label class="text-bold" header>Accounts</q-item-label>
 
-        <div>V0.0.1a</div>
-      </q-toolbar>
-    </q-header>
+                <NavigationLink
+                    v-for="link in accountsLinks"
+                    :key="link.title"
+                    v-bind="link"
+                />
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      class="bg-grey-10"
-      side="left"
-      show-if-above
-    >
-      <q-list>
+                <q-item-label class="text-bold" header>APIs</q-item-label>
+            </q-list>
+        </q-drawer>
 
-        <q-item-label class="text-bold" header>Accounts</q-item-label>
-
-        <NavigationLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-
-        <q-item-label class="text-bold" header>APIs</q-item-label>
-
-      </q-list>
-
-      <q-btn label="Logout" unelevated color="grey-15" class="text-uppercase full-width" />
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+        <q-page-container>
+            <router-view/>
+        </q-page-container>
+    </q-layout>
 </template>
 
 <script>
-import NavigationLink from 'components/navigation/NavigationLink.vue'
-
-const linksList = [
-  {
-    title: 'Home',
-    caption: 'Return to the home page',
-    icon: 'home',
-    link: '/'
-  },
-  {
-    title: 'Telegram',
-    caption: 'Tools to deal with Telegram',
-    icon: 'telegram',
-    link: '/telegram'
-  },
-  {
-    title: 'Discord',
-    caption: 'Tools to deal with Discord',
-    icon: 'discord',
-    link: '/discord'
-  },
-  {
-    title: 'Instagram',
-    caption: 'Tools to deal with Instagram',
-    icon: 'send',
-    link: '/instagram'
-  },
-  {
-    title: 'Twitter',
-    caption: 'Tools to deal with Twitter',
-    icon: 'tag',
-    link: '/twitter'
-  }
+const accountsLinks = [
+    {
+        title: 'Mail',
+        caption: 'Tools to deal with Email',
+        icon: 'fas fa-envelope',
+        link: '/mail'
+    },
+    {
+        title: 'Telegram',
+        caption: 'Tools to deal with Telegram',
+        icon: 'fab fa-telegram',
+        link: '/telegram'
+    },
+    {
+        title: 'Discord',
+        caption: 'Tools to deal with Discord',
+        icon: 'fab fa-discord',
+        link: '/discord'
+    },
+    {
+        title: 'Instagram',
+        caption: 'Tools to deal with Instagram',
+        icon: 'fas fa-hashtag',
+        link: '/instagram'
+    },
+    {
+        title: 'Twitter',
+        caption: 'Tools to deal with Twitter',
+        icon: 'fab fa-twitter',
+        link: '/twitter'
+    },
+    {
+        title: 'Steam',
+        caption: 'Tools to deal with Twitter',
+        icon: 'fab fa-steam',
+        link: '/steam'
+    }
 ];
 
-import { defineComponent, ref } from 'vue'
+import {defineComponent, ref} from 'vue'
+import {setCssVar, useQuasar} from 'quasar'
+import NavigationLink from 'components/NavigationLink.vue'
+
 
 export default defineComponent({
-  name: 'MainLayout',
+    name: 'MainLayout',
 
-  components: {
-    NavigationLink
-  },
+    components: {
+        NavigationLink
+    },
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+    methods: {
+        isAuthenticated: function () {
+            return this.$q.cookies.has('token')
+        },
+        getUsername: function () {
+            return this.$q.cookies.get('username')
+        }
+    },
 
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+    setup() {
+        const $q = useQuasar()
+        const leftDrawerOpen = ref(false)
+
+        accountsLinks.sort((a, b) => {
+            if(a.title < b.title) { return -1; }
+            if(a.title > b.title) { return 1; }
+            return 0;
+        })
+
+        // setCssVar('dark', '#364F6B')
+        // setCssVar('primary', '#AA96DA')
+        // setCssVar('secondary', '#FCBAD3')
+        // setCssVar('accent', '#A8D8EA')
+
+        return {
+            accountsLinks: accountsLinks,
+
+            leftDrawerOpen,
+            toggleLeftDrawer() {
+                leftDrawerOpen.value = !leftDrawerOpen.value
+            },
+            getDarkModeIcon() {
+                return $q.dark.isActive ? 'fas fa-sun' : 'fas fa-moon'
+            },
+            toggleDarkMode() {
+                $q.dark.toggle()
+            }
+        }
     }
-  }
 })
 </script>

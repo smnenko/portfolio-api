@@ -1,26 +1,17 @@
-# Socials Panel (socials_panel)
+# Portfolio-API FRONTEND
+Project uses Quasar, and some frameworks like axios to interact with a backend in GraphQL mode.
 
-Application provides functions to deal with social networks like Discord, Telegram and etc.
+## Project stack:
+1. Quasar \>= 2.0.0
 
-## Install the dependencies
-```bash
-yarn
-```
+## Installation
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+#### Install dependencies
+>Make sure you've installed yarn
 
-### Lint the files
-```bash
-yarn run lint
-```
+```yarn```
 
-### Build the app for production
-```bash
-quasar build
-```
+### Running
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+```quasar build``` build for production mode
+```quasar dev``` run for development mode
